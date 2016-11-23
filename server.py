@@ -5,6 +5,8 @@ import logging
 import json
 import sys
 
+selfbot = False
+
 logging.basicConfig(level=logging.INFO)
 
 client = discord.Client()
@@ -29,7 +31,7 @@ def command(name):
 @client.event
 @asyncio.coroutine
 def on_message(message):
-    if message.author.id != client.user.id:
+    if selfbot is True and message.author.id != client.user.id:
         return
     
     for command, function in commands.items():
